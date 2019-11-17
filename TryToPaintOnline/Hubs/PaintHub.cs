@@ -20,6 +20,14 @@ namespace TryToPaintOnline.Hubs
             Clients.All.SendAsync("Clear");
         }
 
+        public void SendMessage(string message)
+        {
+            var context = Context.GetHttpContext();
+            string userName;
+            context.Request.Cookies.TryGetValue("user", out userName);
+            Clients.All.SendAsync("SendMessage",$"{userName}:{message}");
+        }
+
         public override async Task OnConnectedAsync()
         {
             var id = Context.ConnectionId;
@@ -38,7 +46,6 @@ namespace TryToPaintOnline.Hubs
                 }
             }
             await base.OnConnectedAsync().ConfigureAwait(false);
-
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)

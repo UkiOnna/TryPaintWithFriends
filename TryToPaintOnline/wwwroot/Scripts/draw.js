@@ -19,6 +19,30 @@ hubConnection.on('Notify', function (message) {
     document.getElementById("chatroom").appendChild(elem);
 });
 
+hubConnection.on('SendMessage', function (message) {
+    array = message.split(":");
+    let bElem = document.createElement("b");
+    bElem.appendChild(document.createTextNode(array[0]+":"));
+    let notifyElem = document.createElement("span");
+    notifyElem.appendChild(document.createTextNode(array[1]));
+    let elem = document.createElement("li");
+    let divComment = document.createElement("div");
+    divComment.classList.add("commentText");
+    divComment.appendChild(bElem);
+    divComment.appendChild(notifyElem);
+    elem.appendChild(divComment);
+    document.getElementById("chatroom").appendChild(elem);
+});
+
+document.getElementById("sendButton").onclick = function sendMessage() {
+    message = document.getElementById('inputMessage').value;
+    if (message) {
+        document.getElementById('inputMessage').value = "";
+        hubConnection.invoke('SendMessage',message);
+    }
+    
+};
+
 
  //Выполняем по завершении загрузки страницы
 window.addEventListener("load", function onWindowLoad() {
