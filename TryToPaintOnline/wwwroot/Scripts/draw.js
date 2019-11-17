@@ -1,4 +1,26 @@
-﻿// Выполняем по завершении загрузки страницы
+﻿let hubUrl = 'https://localhost:44343/painter';
+const hubConnection = new signalR.HubConnectionBuilder()
+    .withUrl(hubUrl)
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
+   start();
+
+
+hubConnection.on('Notify', function (message) {
+
+    // добавляет элемент для диагностического сообщения
+    let notifyElem = document.createElement("b");
+    notifyElem.appendChild(document.createTextNode(message));
+    let elem = document.createElement("li");
+    let divComment = document.createElement("div");
+    divComment.classList.add("commentText");
+    divComment.appendChild(notifyElem);
+    elem.appendChild(divComment);
+    document.getElementById("chatroom").appendChild(elem);
+});
+
+
+ //Выполняем по завершении загрузки страницы
 window.addEventListener("load", function onWindowLoad() {
     // Инициализируем переменные
     // Генерируем палитру в элемент #palette
@@ -6,6 +28,8 @@ window.addEventListener("load", function onWindowLoad() {
 
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
+
+
 
     // переменные для рисования
     context.lineCap = "round";
@@ -15,6 +39,7 @@ window.addEventListener("load", function onWindowLoad() {
     // очистка изображения
     document.getElementById("clear").onclick = function clear() {
         context.clearRect(0, 0, canvas.width, canvas.height);
+        hubConnection.invoke('Clear');
     };
 
     // На любое движение мыши по canvas будет выполнятся эта функция
@@ -33,9 +58,13 @@ window.addEventListener("load", function onWindowLoad() {
             context.lineTo(x - dx, y - dy);
             context.stroke();
             context.closePath();
+            hubConnection.invoke('Send', x, y, dx, dy, context.strokeStyle);
         }
 
         // отправляет контекст
+       
+
+
     };
 
     function generatePalette(palette) {
@@ -62,3 +91,16 @@ window.addEventListener("load", function onWindowLoad() {
         }
     }
 });
+
+
+async function start() {
+    try {
+        await hubConnection.start();
+        console.log("connected");
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+}
+
+

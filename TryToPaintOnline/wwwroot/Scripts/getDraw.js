@@ -1,30 +1,45 @@
-﻿indow.addEventListener("load", function onWindowLoad() {
-    // Инициализируем переменные
-    // Генерируем палитру в элемент #palette
-    generatePalette(document.getElementById("palette"));
+﻿let hubUrl = 'https://localhost:44343/paint';
+const hubConnection = new signalR.HubConnectionBuilder()
+    .withUrl(hubUrl)
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
 
+start();
+
+
+window.addEventListener("load", function onWindowLoad() {
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
+
+    context.lineCap = "round";
+    context.lineWidth = 8;
     //получает контекст и приравнивает к этому
+    hubConnection.on('Send', function (x, y,dx,dy, color) {
+        context.strokeStyle = color;
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x - dx, y - dy);
+        context.stroke();
+        context.closePath();
+    });
+    hubConnection.on('Clear', function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    });
 
-    function generatePalette(palette) {
-        // генерируем палитру
-        // в итоге 5^3 цветов = 125
-        for (var r = 0, max = 4; r <= max; r++) {
-            for (var g = 0; g <= max; g++) {
-                for (var b = 0; b <= max; b++) {
-                    var paletteBlock = document.createElement('div');
-                    paletteBlock.className = 'button';
+    hubConnection.onclose(async () => {
+        await start();
+    });
 
-                    paletteBlock.style.backgroundColor = (
-                        'rgb(' + Math.round(r * 255 / max) + ", "
-                        + Math.round(g * 255 / max) + ", "
-                        + Math.round(b * 255 / max) + ")"
-                    );
-
-                    palette.appendChild(paletteBlock);
-                }
-            }
-        }
-    }
 });
+
+
+
+async function start() {
+    try {
+        await hubConnection.start();
+        console.log("connected");
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+}

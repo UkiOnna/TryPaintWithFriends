@@ -8,8 +8,10 @@ namespace TryToPaintOnline.Controllers
 {
     public class PaintController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string login)
         {
+            ViewBag.isDrawer = true;
+            ViewBag.Login = login;
             return View();
         }
     }
