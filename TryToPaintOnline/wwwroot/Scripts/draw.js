@@ -32,6 +32,8 @@ hubConnection.on('SendMessage', function (message) {
     divComment.appendChild(notifyElem);
     elem.appendChild(divComment);
     document.getElementById("chatroom").appendChild(elem);
+    var objDiv = document.getElementById("chatroom");
+    objDiv.scrollTop = objDiv.scrollHeight;
 });
 
 document.getElementById("sendButton").onclick = function sendMessage() {
