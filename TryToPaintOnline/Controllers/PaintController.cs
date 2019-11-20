@@ -9,9 +9,10 @@ namespace TryToPaintOnline.Controllers
 {
     public class PaintController : Controller
     {
+        int counter = 0;
+        [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.isDrawer = true;
             return View();
         }
     }

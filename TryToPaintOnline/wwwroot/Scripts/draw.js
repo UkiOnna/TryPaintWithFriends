@@ -3,10 +3,10 @@ const hubConnection = new signalR.HubConnectionBuilder()
     .withUrl(hubUrl)
     .configureLogging(signalR.LogLevel.Information)
     .build();
-   start();
+start();
 
 
-hubConnection.on('Notify', function (message,countMessage) {
+hubConnection.on('Notify', function (message, countMessage) {
 
     // добавляет элемент для диагностического сообщения
     let notifyElem = document.createElement("b");
@@ -20,10 +20,20 @@ hubConnection.on('Notify', function (message,countMessage) {
     document.getElementById("chatroom").appendChild(elem);
 });
 
+hubConnection.on('StartGame', function (username) {
+    currentUser = getCookie("user");
+    if (username === currentUser) {
+        document.getElementById("paintScript").src = "~/Scripts/draw.js";
+    }
+    else {
+        document.getElementById("paintScript").src = "~/Scripts/getDraw.js";
+    }
+});
+
 hubConnection.on('SendMessage', function (message) {
     array = message.split(":");
     let bElem = document.createElement("b");
-    bElem.appendChild(document.createTextNode(array[0]+":"));
+    bElem.appendChild(document.createTextNode(array[0] + ":"));
     let notifyElem = document.createElement("span");
     notifyElem.appendChild(document.createTextNode(array[1]));
     let elem = document.createElement("li");
@@ -41,13 +51,12 @@ document.getElementById("sendButton").onclick = function sendMessage() {
     message = document.getElementById('inputMessage').value;
     if (message) {
         document.getElementById('inputMessage').value = "";
-        hubConnection.invoke('SendMessage',message);
+        hubConnection.invoke('SendMessage', message);
     }
-    
 };
 
 
- //Выполняем по завершении загрузки страницы
+//Выполняем по завершении загрузки страницы
 window.addEventListener("load", function onWindowLoad() {
     // Инициализируем переменные
     // Генерируем палитру в элемент #palette
@@ -89,7 +98,7 @@ window.addEventListener("load", function onWindowLoad() {
         }
 
         // отправляет контекст
-       
+
 
 
     };
@@ -130,4 +139,10 @@ async function start() {
     }
 }
 
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 

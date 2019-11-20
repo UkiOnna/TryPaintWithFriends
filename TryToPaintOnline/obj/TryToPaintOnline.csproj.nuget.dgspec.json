@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sikir\\Desktop\\программрование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj": {}
+    "C:\\Users\\User\\Desktop\\Темир\\программирование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sikir\\Desktop\\программрование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj": {
+    "C:\\Users\\User\\Desktop\\Темир\\программирование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sikir\\Desktop\\программрование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Темир\\программирование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj",
         "projectName": "TryToPaintOnline",
-        "projectPath": "C:\\Users\\sikir\\Desktop\\программрование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj",
-        "packagesPath": "C:\\Users\\sikir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sikir\\Desktop\\программрование\\TryPaintWithFriends\\TryToPaintOnline\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\Темир\\программирование\\TryPaintWithFriends\\TryToPaintOnline\\TryToPaintOnline.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Темир\\программирование\\TryPaintWithFriends\\TryToPaintOnline\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "D:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\sikir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

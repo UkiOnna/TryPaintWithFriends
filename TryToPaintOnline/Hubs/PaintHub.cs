@@ -10,6 +10,7 @@ namespace TryToPaintOnline.Hubs
     public class PaintHub : Hub
     {
         static public List<User> Users { private set; get; } = new List<User>();
+        bool gameStart = false;
         public void Send(int x, int y, int dx, int dy, string color)
         {
             Clients.All.SendAsync("Send", x, y, dx, dy, color);
@@ -26,6 +27,15 @@ namespace TryToPaintOnline.Hubs
             string userName;
             context.Request.Cookies.TryGetValue("user", out userName);
             Clients.All.SendAsync("SendMessage",$"{userName}:{message}");
+        }
+
+        public void StartGame()
+        {
+            gameStart = true;
+            var context = Context.GetHttpContext();
+            string userName;
+            context.Request.Cookies.TryGetValue("user", out userName);
+            Clients.All.SendAsync("StartGame",userName);
         }
 
         public override async Task OnConnectedAsync()
