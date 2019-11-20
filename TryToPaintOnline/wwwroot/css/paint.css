@@ -47,12 +47,10 @@
 .detailBox {
     width: auto;
     border: 1px solid #bbb;
-    margin: 50px;
 }
 
 
 .commentBox {
-    padding: 10px;
     border-top: 1px dotted #bbb;
 }
 
@@ -100,5 +98,4 @@
 
 .actionBox {
     border-top: 1px dotted #bbb;
-    padding: 10px;
 }

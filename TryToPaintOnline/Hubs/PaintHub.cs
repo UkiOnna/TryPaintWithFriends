@@ -9,7 +9,7 @@ namespace TryToPaintOnline.Hubs
 {
     public class PaintHub : Hub
     {
-        static List<User> Users = new List<User>();
+        static public List<User> Users { private set; get; } = new List<User>();
         public void Send(int x, int y, int dx, int dy, string color)
         {
             Clients.All.SendAsync("Send", x, y, dx, dy, color);
@@ -40,7 +40,7 @@ namespace TryToPaintOnline.Hubs
                     if (context.Request.Cookies.TryGetValue("user", out userName))
                     {
                         Users.Add(new User { ConnectionId = id, Name = userName });
-                        await Clients.All.SendAsync("Notify", $"{userName} вошел в чат").ConfigureAwait(false);
+                        await Clients.All.SendAsync("Notify", $"{userName} вошел в чат", $"Подключено({Users.Count}/8)").ConfigureAwait(false);
 
                     }
                 }
@@ -55,7 +55,7 @@ namespace TryToPaintOnline.Hubs
             {
                 Users.Remove(item);
                 var id = Context.ConnectionId;
-                await Clients.All.SendAsync("Notify", $"{item.Name} покинул в чат").ConfigureAwait(false);
+                await Clients.All.SendAsync("Notify", $"{item.Name} покинул в чат", $"Подключено({Users.Count}/8)").ConfigureAwait(false);
             }
             await base.OnDisconnectedAsync(exception).ConfigureAwait(false);
         }

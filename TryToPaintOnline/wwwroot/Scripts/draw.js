@@ -6,7 +6,7 @@ const hubConnection = new signalR.HubConnectionBuilder()
    start();
 
 
-hubConnection.on('Notify', function (message) {
+hubConnection.on('Notify', function (message,countMessage) {
 
     // добавляет элемент для диагностического сообщения
     let notifyElem = document.createElement("b");
@@ -16,6 +16,7 @@ hubConnection.on('Notify', function (message) {
     divComment.classList.add("commentText");
     divComment.appendChild(notifyElem);
     elem.appendChild(divComment);
+    document.getElementById("connectedCount").innerHTML = countMessage;
     document.getElementById("chatroom").appendChild(elem);
 });
 
