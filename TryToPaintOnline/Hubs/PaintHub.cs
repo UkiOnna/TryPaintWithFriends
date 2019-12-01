@@ -42,6 +42,7 @@ namespace TryToPaintOnline.Hubs
         {
             var id = Context.ConnectionId;
             var context = Context.GetHttpContext();
+            var i=context.Request.Path.Value;
             if (!Users.Any(x => x.ConnectionId == id))
             {
                 if (context.Request.Cookies.ContainsKey("user"))

@@ -10,10 +10,15 @@ namespace TryToPaintOnline.Controllers
     public class PaintController : Controller
     {
         int counter = 0;
-        [HttpGet]
-        public IActionResult Index()
+        [HttpGet("{id}")]
+        public IActionResult Index(int? id)
         {
-            return View();
+            if (id != null)
+            {
+                ViewBag.RoomNumber = id.ToString();
+                return View();
+            }
+            return NotFound();
         }
     }
 }

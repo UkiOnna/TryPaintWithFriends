@@ -1,8 +1,12 @@
-﻿let hubUrl = 'https://localhost:44343/painter';
+﻿let hubUrl = 'https://localhost:44343/painter/';
 const hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl(hubUrl)
+    .withUrl(hubUrl, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
+    })
     .configureLogging(signalR.LogLevel.Information)
     .build();
+
 start();
 
 

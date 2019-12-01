@@ -1,9 +1,19 @@
-﻿document.getElementById("signIn").onclick = function signIn() {
-    nameUser = document.getElementById("login").value;
-    if (nameUser) {
-        document.cookie = "user=" + nameUser + ";" +"domain=localhost:44343"; // обновляем только куки с именем 'user'
+﻿
+function WriteCookie() {
+    if (document.myform.customer.value === "") {
+        alert("Enter some value!");
+        return;
     }
-    else {
-        alert("fill name")
-    }
-};
+    document.myform.action = "/Main/IndexPost";
+    document.myform.method = "post";
+    cookievalue = escape(document.myform.customer.value) + ";";
+    document.cookie = "user=" + cookievalue;
+}
+
+function CreateRoom() {
+
+}
+
+function ConnectRoom() {
+
+}
