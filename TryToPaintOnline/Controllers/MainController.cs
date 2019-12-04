@@ -22,7 +22,7 @@ namespace TryToPaintOnline.Controllers
         [HttpPost]
         public IActionResult IndexPost()
         {
-            return RedirectToAction("Index", "Paint", new { id = RoomIdGenerator.GetRoomNumber() });
+            return RedirectToAction("Index", "Paint");
         }
     }
 }

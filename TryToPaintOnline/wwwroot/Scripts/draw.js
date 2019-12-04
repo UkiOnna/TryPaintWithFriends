@@ -149,4 +149,25 @@ function getCookie(name) {
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+function WriteCookie(id) {
+    if (document.myform.customer.value === "") {
+        alert("Enter some value!");
+        return;
+    }
+    document.myform.action = "/Main/IndexPost";
+    document.myform.method = "post";
+    cookievalue = escape(document.myform.customer.value) + ";";
+    document.cookie = "user=" + cookievalue;
+    if (id === 'createRoomBtn') {
+        hubConnection.invoke('CreateGroup', cookievalue);
+    }
+    else {
+        if (document.myform.number.value === "") {
+            alert("Enter some value!");
+            return;
+        }
+        hubConnection.invoke('JoinGroup', document.myform.number.value, cookievalue);
+    }
+}
+
 

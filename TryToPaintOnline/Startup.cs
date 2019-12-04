@@ -78,7 +78,7 @@ namespace TryToPaintOnline
                     template: "{controller=Main}/{action=Index}/{id?}");
             });
 
-          
+
 
 
         }

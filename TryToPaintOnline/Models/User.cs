@@ -9,5 +9,6 @@ namespace TryToPaintOnline.Models
     {
         public string ConnectionId { get; set; }
         public string Name { get; set; }
+        public string GroupId { get; set; }
     }
 }

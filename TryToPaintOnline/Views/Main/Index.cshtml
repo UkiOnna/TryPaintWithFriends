@@ -5,23 +5,24 @@
 
 <div class="container">
     <div class="row">
-            <form name="myform" action="" class="">
-                <div class="form-row">
-                    <div class="form-group m-3">
-                        <label>Введите имя</label>
-                        <input class="form-control" type="text" name="customer" placeholder="Имя..">
-                        <button type="submit" class="btn btn-primary mt-2" onclick="WriteCookie();">Создать комнату</button>
-                    </div>
-                    
-                    <div class="form-group m-3">
-                        <label>Введите номер комнаты</label>
-                        <input class="form-control" type="text" name="number" placeholder="Номер..">
-                        <button type="submit" class="btn btn-primary mt-2" onclick="WriteCookie();">Подключиться к комнате</button>
-                    </div>
-                    
+        <form name="myform" action="" class="">
+            <div class="form-row">
+                <div class="form-group m-3">
+                    <label>Введите имя</label>
+                    <input class="form-control" type="text" name="customer" placeholder="Имя..">
+                    <button id="createRoomBtn" type="submit" class="btn btn-primary mt-2" onclick="WriteCookie(this.id);">Создать комнату</button>
                 </div>
-            </form>
+
+                <div class="form-group m-3">
+                    <label>Введите номер комнаты</label>
+                    <input class="form-control" type="text" name="number" placeholder="Номер..">
+                    <button id="connectRoomBtn" type="submit" class="btn btn-primary mt-2" onclick="WriteCookie(this.id);">Подключиться к комнате</button>
+                </div>
+
+            </div>
+        </form>
     </div>
 </div>
+<script src="~/Scripts/draw.js"></script>
 
 
